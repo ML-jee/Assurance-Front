@@ -1,0 +1,9 @@
+.app-wallet-button button,
+.app-wallet-button a {
+  margin-right: 8px;
+  margin-bottom: 6px;
+}
+
+.app-wallet-button {
+  display: inline-block;
+}
