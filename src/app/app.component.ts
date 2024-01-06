@@ -10,6 +10,7 @@ import { WalletButtonComponent } from "./wallet-button/wallet-button.component";
     styleUrl: './app.component.css',
     imports: [CommonModule, RouterOutlet, WalletButtonComponent]
 })
+
 export class AppComponent {
   title = 'Assurance-Front';
 }
