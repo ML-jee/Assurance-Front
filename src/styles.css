@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {   padding-top: 56px; /* Adjust the padding-top based on your navbar height */
+   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+ 
+
+body {
+  background: linear-gradient(to right, #56ccf2, #2f80ed); /* Light blue to Dark blue */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}

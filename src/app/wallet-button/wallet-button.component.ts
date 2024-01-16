@@ -3,8 +3,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import { MetaMaskService } from '../meta-mask.service';
-import { MetaMaskSDK } from '@metamask/sdk';
-
 
 @Component({
   selector: 'app-wallet-button',
