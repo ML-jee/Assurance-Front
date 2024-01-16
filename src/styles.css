@@ -9,6 +9,7 @@ body {
   background: linear-gradient(to right, #56ccf2, #2f80ed); /* Light blue to Dark blue */
   height: 100vh;
   display: flex;
+
   align-items: center;
   justify-content: center;
   color: #fff;
