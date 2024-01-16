@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { WalletButtonComponent } from "./wallet-button/wallet-button.component";
-
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 @Component({
     selector: 'app-root',
     standalone: true,
