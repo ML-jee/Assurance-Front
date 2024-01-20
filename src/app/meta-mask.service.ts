@@ -13,6 +13,29 @@ export class MetaMaskService {
     this.init();
   }
 
+  /*private init(): void {
+    if (typeof window.ethereum !== 'undefined') {
+      window.ethereum.enable()
+        .then(() => {
+          this.web3 = new Web3(window.ethereum);
+          console.log('MetaMask is enabled.');
+        })
+        .catch((error: any) => {
+          console.error('Error enabling MetaMask:', error);
+        });
+    } else {
+      console.warn('MetaMask not detected!');
+    }
+  }
+
+  getWeb3(): any {
+    return this.web3;
+  }
+
+  isMetaMaskEnabled(): boolean {
+    return typeof window.ethereum !== 'undefined';
+  }*/
+
   private init(): void {
     if (typeof window.ethereum !== 'undefined') {
       window.ethereum.enable()
@@ -35,4 +58,20 @@ export class MetaMaskService {
   isMetaMaskEnabled(): boolean {
     return typeof window.ethereum !== 'undefined';
   }
+
+  connectMetaMask(): void {
+    if (this.isMetaMaskEnabled()) {
+      window.ethereum
+        .request({ method: 'eth_requestAccounts' })
+        .then((accounts: string[]) => {
+          console.log('MetaMask wallet connected:', accounts);
+        })
+        .catch((error: any) => {
+          console.error('Error connecting MetaMask wallet:', error);
+        });
+    } else {
+      console.warn('MetaMask not detected!');
+    }
+  }
+  
 }

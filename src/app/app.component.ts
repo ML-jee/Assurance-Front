@@ -4,13 +4,20 @@ import { RouterOutlet } from '@angular/router';
 import { WalletButtonComponent } from "./wallet-button/wallet-button.component";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ConnectionComponent } from "./connection/connection.component";
+import { HomepageComponent } from './homepage/homepage.component';
+import { RegisterComponent } from './register/register.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { JwtService } from './services/jwt.service';
+
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [CommonModule, RouterOutlet, NavBarComponent, ConnectionComponent]
-})
+    imports: [CommonModule, RouterOutlet, NavBarComponent, 
+      ConnectionComponent, HomepageComponent,
+    RegisterComponent]})
 
 export class AppComponent {
   title = 'Assurance-Front';
