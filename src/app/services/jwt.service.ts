@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 
-const BASE_URL = ["http://localhost:8085/"]
+const BASE_URL = 'http://localhost:8085/';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,9 @@ export class JwtService {
 
   register(registerRequest: any): Observable<any> {
     return this.http.post(BASE_URL + 'register', registerRequest)
-      .pipe(
-        catchError((error: any) => {
-          console.error('Error in registration request:', error);
-          throw error;
-        })
-      );
+  }
+
+  login(loginRequest: any): Observable<any> {
+    return this.http.post(BASE_URL + 'login', loginRequest)
   }
 }

@@ -6,9 +6,6 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ConnectionComponent } from "./connection/connection.component";
 import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './register/register.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { JwtService } from './services/jwt.service';
 
 @Component({
     selector: 'app-root',
