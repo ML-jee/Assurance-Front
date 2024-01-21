@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtService } from '../services/jwt.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
   adresseWallet: string = ''; // Add this line
   password: string = ''; // Add this line
 
-  constructor(private service: JwtService, private fb: FormBuilder) {}
+  constructor(private service: JwtService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -42,9 +43,19 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    const { adresseWallet, password } = this.loginForm.value;
+
     this.service.login(this.loginForm.value).subscribe((response) => {
       console.log(response);
+
+      // Check if adresseWallet is adminWallet
+      if (adresseWallet === 'adminWallet') {
+        // Redirect to /admin
+        this.router.navigate(['/admin']);
+      } else {
+        // Redirect to home page
+        this.router.navigate(['/']);
+      }
     });
-    console.log(this.loginForm);
   }
 }

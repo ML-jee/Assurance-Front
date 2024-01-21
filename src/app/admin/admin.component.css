@@ -1,0 +1,56 @@
+.column {
+    columns: 4;
+    gap: 20px; /* Adjust the gap between columns as needed */
+  }
+  
+  .section-container {
+    break-inside: avoid; /* Prevent section containers from breaking across columns */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .example-button-row button,
+  .example-button-row a {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .example-disabled {
+    display: inline-block;
+  }
+  
+  /* Additional styling for the forms */
+  .hidden-form {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text content horizontally */
+  }
+  
+  /* Style the form labels and inputs */
+  .hidden-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .hidden-form input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Style the form submit button */
+  .hidden-form button {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    align-self: center; /* Center the button within the flex container */
+  }
+  

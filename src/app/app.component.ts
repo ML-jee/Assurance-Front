@@ -7,6 +7,7 @@ import { ConnectionComponent } from "./connection/connection.component";
 import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './register/register.component';
 
+
 @Component({
     selector: 'app-root',
     standalone: true,

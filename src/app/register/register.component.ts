@@ -90,9 +90,7 @@
       // Handle error if needed
       console.error(error);
     }
-  });
-    console.log(this.registerForm.value);
-    
+  });    
     
   }
 
