@@ -1,7 +1,9 @@
 app-rout{
   justify-content: center;
   display: flex;
-  
   align-items: center;
   justify-content: center;
+  padding: 0;
+  margin: 0;
+  
 }
