@@ -10,7 +10,7 @@ body {
   background: linear-gradient(to right,rgb(153, 101, 153),rgb(153, 47, 153),rgb(113, 10, 113)); /* Light blue to Dark blue */
   height: 2000px;
   display: flex;
-  
+  width: auto;
   align-items: center;
   justify-content: center;
   color: #fff;
