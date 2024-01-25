@@ -14,10 +14,10 @@ export class JwtService {
   constructor(private http: HttpClient) { }
 
   register(registerRequest: any): Observable<any> {
-    return this.http.post(BASE_URL + 'register', registerRequest)
+    return this.http.post(BASE_URL + 'client/register', registerRequest)
   }
 
   login(loginRequest: any): Observable<any> {
-    return this.http.post(BASE_URL + 'login', loginRequest)
+    return this.http.post(BASE_URL + 'client/login', loginRequest)
   }
 }

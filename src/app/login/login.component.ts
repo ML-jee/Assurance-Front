@@ -31,14 +31,14 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   hide = true;
   adresseWallet: string = ''; // Add this line
-  password: string = ''; // Add this line
+  
 
   constructor(private service: JwtService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       adresseWallet: ['', [Validators.required]],
-      password: ['', Validators.required],
+     
     });
   }
 

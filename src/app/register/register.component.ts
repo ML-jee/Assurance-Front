@@ -43,7 +43,7 @@
     nom: string = '';
     cin: string = '';
     email: string = '';
-    password: string = '';
+    genre: string = '';
     adresseWallet: string = '';
     revenue: number | null = null;
     nbreEnfants: number | null = null;
@@ -64,7 +64,7 @@
         nom: [''],
         cin: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required]],
+        genre: ['', [Validators.required]],
         adresseWallet: [''],
         revenue: [null],
         nbreEnfants: [null],

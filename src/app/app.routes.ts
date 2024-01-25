@@ -3,11 +3,13 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ConnectionComponent } from "./connection/connection.component";
 import { AdminComponent } from './admin/admin.component';
-
+import { AboutComponent } from './about/about.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 export const routes: Routes = [
-  {path :'', component : ConnectionComponent },
+  {path :'', component : HomepageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  {path : 'admin', component: AdminComponent}
+  {path : 'admin', component: AdminComponent},
+  {path : 'about', component:AboutComponent}
 ];

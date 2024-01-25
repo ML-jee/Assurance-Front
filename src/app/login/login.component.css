@@ -1,6 +1,6 @@
 .mat-form-container {
   width: 350px;
-  height: 300px;
+  height: 200px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
@@ -16,7 +16,8 @@
 }
 
 mat-form-field {
-  width: 100%;
+  width: 70%;
+  align-self: center;
 }
 
 mat-label {
