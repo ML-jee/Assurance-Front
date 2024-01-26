@@ -46,16 +46,30 @@ export class LoginComponent implements OnInit {
     const { adresseWallet } = this.loginForm.value;
 
     this.service.login(this.loginForm.value).subscribe((response) => {
-      console.log(response);
-      
-      // Check if adresseWallet is adminWallet
-      if (adresseWallet === 'adminWallet') {
-        // Redirect to /admin
-        this.router.navigate(['/admin']);
+      //console.log(response);
+
+      // Store entire response in local storage
+      localStorage.setItem('loginResponse', JSON.stringify(response));
+
+       // Retrieve the stored response from local storage
+      const storedResponse = localStorage.getItem('loginResponse');
+
+      if (storedResponse) {
+        // Parse the JSON string to get the response object
+        const utilisateurStocke = JSON.parse(storedResponse);
+        console.log(utilisateurStocke);  // Display the retrieved object in the console
+
+        // Check if adresseWallet is adminWallet
+        if (adresseWallet === 'adminWallet') {
+          // Redirect to /admin
+          this.router.navigate(['/admin']);
+        } else {
+          // Redirect to home page
+          this.router.navigate(['/assurance']);
+        }
       } else {
-        // Redirect to home page
-        this.router.navigate(['/assurance']);
+        console.error('No login response found in local storage.');
       }
     });
-  }
+    }
 }

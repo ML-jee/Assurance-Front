@@ -6,6 +6,7 @@ import { JwtService } from '../services/jwt.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -15,16 +16,42 @@ import { Router } from '@angular/router';
   imports: [MatCardModule, MatButtonModule,HttpClientModule,CommonModule],
   templateUrl: './assurance.component.html',
   styleUrl: './assurance.component.css',
-  providers: [JwtService],
+  providers: [JwtService,DatePipe],
 })
 export class AssuranceComponent  implements OnInit{
   assurances: any[] = []; // Declare assurance as a property
   addAssuranceDto: any = {};
-  constructor(private jwtService: JwtService, private router: Router) { }
+  adresse: string = '';
+  genre: string = '';
+  statutMarital: string = '';
+  dateNaissance: string | null = null;
+  constructor(private jwtService: JwtService,
+     private router: Router,
+     private datePipe: DatePipe
+     ) { }
 
   ngOnInit(): void {
     this.getAllAssurance();
+    // Retrieve login response from local storage
+    const storedResponse = localStorage.getItem('loginResponse');
+    if (storedResponse) {
+      // Parse the JSON string to get the response object
+      const response = JSON.parse(storedResponse);
+      
+      // Retrieve nom and prenom from the 'data' object in the response
+      this.adresse = response.data.adresse; 
+      this.genre = response.data.genre; 
+      this.statutMarital=response.data.statutMarital;
+      const dateNaissance = new Date(response.data.dateNaissance);
+
+      this.dateNaissance = this.datePipe.transform(dateNaissance, 'yyyy-MM-dd');
+
+      console.log(this.adresse,this.dateNaissance,this.genre,this.statutMarital);
+      console.log(response);
+    }
   }
+
+
 
   
   getAllAssurance(): void {
