@@ -1,3 +1,9 @@
+<!-- Prediction Result Section -->
+<div *ngIf="predictionResult" class="prediction-result">
+  <h2>Best Insurance for you</h2>
+  <h3>{{ predictionResult }}</h3>
+</div>
+  
 <div class="example-card-container">
     <div *ngFor="let singleAssurance of assurances">
       <mat-card class="example-card">
@@ -16,4 +22,5 @@
       </mat-card>
     </div>
   </div>
+
   

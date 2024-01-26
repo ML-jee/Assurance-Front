@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-
+import { AssuranceService } from '../services/assurance.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
   imports: [MatCardModule, MatButtonModule,HttpClientModule,CommonModule],
   templateUrl: './assurance.component.html',
   styleUrl: './assurance.component.css',
-  providers: [JwtService,DatePipe],
+  providers: [JwtService,DatePipe,AssuranceService],
 })
 export class AssuranceComponent  implements OnInit{
   assurances: any[] = []; // Declare assurance as a property
@@ -25,9 +25,12 @@ export class AssuranceComponent  implements OnInit{
   genre: string = '';
   statutMarital: string = '';
   dateNaissance: string | null = null;
+  predictionResult: string='' ;
+
   constructor(private jwtService: JwtService,
      private router: Router,
-     private datePipe: DatePipe
+     private datePipe: DatePipe, 
+     private assuranceService: AssuranceService
      ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,8 @@ export class AssuranceComponent  implements OnInit{
 
       console.log(this.adresse,this.dateNaissance,this.genre,this.statutMarital);
       console.log(response);
+
+      this.predictAssurance();
     }
   }
 
@@ -67,6 +72,54 @@ export class AssuranceComponent  implements OnInit{
       });
   }
 
+  
+
+  /*predictAssurance(): void {
+    const params = {
+      dateNaissance: this.dateNaissance,
+      adresse: this.adresse,
+      genre: this.genre,
+      statutMarital: this.statutMarital
+    };
+    console.log(params);
+    this.assuranceService.predictAssuranceWithParams(params).subscribe({
+      next: (prediction: any) => {
+        console.log('Assurance prediction:', prediction);
+  
+        // Affichez ici les détails spécifiques de la réponse que vous souhaitez voir
+        //console.log('Product Info:', prediction.product_info);
+  
+        // Handle prediction response here
+      },
+      error: (error: any) => {
+        console.error('Error predicting assurance:', error);
+      }
+    });
+  }*/
+  predictAssurance(): void {
+    const params = {
+      dateNaissance: this.dateNaissance,
+      adresse: this.adresse,
+      genre: this.genre,
+      statutMarital: this.statutMarital
+    };
+  
+    this.assuranceService.predictAssuranceWithParams(params).subscribe({
+      next: (prediction: any) => {
+        console.log('Assurance prediction:', prediction);
+        if (prediction && prediction.prediction && prediction.prediction.length > 0) {
+          // Extract the prediction string from the array and assign it to predictionResult
+          this.predictionResult = prediction.prediction[0];
+        } else {
+          this.predictionResult = 'No prediction available.';
+        }
+      },
+      error: (error: any) => {
+        console.error('Error predicting assurance:', error);
+        this.predictionResult = 'Error predicting assurance. Please try again.';
+      }
+    });
+  }
   
   chooseInsurance(idAssurance: string): void {
     // Additional logic can be implemented here if needed
