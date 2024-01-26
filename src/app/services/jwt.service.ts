@@ -20,4 +20,16 @@ export class JwtService {
   login(loginRequest: any): Observable<any> {
     return this.http.post(BASE_URL + 'client/login', loginRequest)
   }
+
+  getAllAssurances(): Observable<any> {
+    return this.http.get(BASE_URL + 'client/getInsurances');
+  }
+
+  getInsurance(idAssurance: number): Observable<any> {
+    return this.http.get(BASE_URL + `client/getInsurance/${idAssurance}`);
+  }
+
+  chooseInsurance(idAssurance: number, addAssuranceDto: any): Observable<any> {
+    return this.http.post(BASE_URL + `client/chooseInsurance/${idAssurance}`, addAssuranceDto);
+  }
 }

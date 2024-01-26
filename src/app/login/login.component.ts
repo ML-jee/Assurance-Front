@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/admin']);
       } else {
         // Redirect to home page
-        this.router.navigate(['/']);
+        this.router.navigate(['/assurance']);
       }
     });
   }

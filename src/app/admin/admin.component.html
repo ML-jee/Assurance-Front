@@ -17,13 +17,6 @@
           </mat-error>
         </mat-form-field>
   
-        <mat-form-field appearance="outline">
-          <mat-label>Insurance Type</mat-label>
-          <input matInput required formControlName="typeAssurance">
-          <mat-error *ngIf="newAssuranceForm.get('typeAssurance')?.invalid && newAssuranceForm.get('typeAssurance')?.touched">
-            Insurance Type is required
-          </mat-error>
-        </mat-form-field>
   
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
@@ -63,8 +56,11 @@
         <form *ngIf="isFormVisible[2]" class="hidden-form" [formGroup]="newAssuranceForm">
             <!-- Your form content goes here -->
             <mat-form-field appearance="outline">
-                <mat-label>Insurance ID</mat-label>
-                <input matInput formControlName="idAssurance" type="number" required>
+              <mat-label>ID</mat-label>
+              <input matInput required formControlName="idAssurance">
+              <mat-error *ngIf="newAssuranceForm.get('idAssurance')?.invalid && newAssuranceForm.get('idAssurance')?.touched">
+                ID is required
+              </mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" (click)="fetchInsuranceDetails()">Fetch Insurance Details</button>

@@ -37,10 +37,8 @@ export class AdminComponent implements OnInit{
   
 
   // Add properties for each form field
-  idAssurance: number | null = null;
-  typeAssurance: string = '';
+  idAssurance: string = '';
   nom: string = '';
-  email: string = '';
   description: string = '';
   prix: number | null = null;
   
@@ -53,8 +51,7 @@ export class AdminComponent implements OnInit{
 
   ngOnInit(): void {
     this.newAssuranceForm = this.fb.group({
-      idAssurance: [null, [Validators.required]],
-      typeAssurance: ['', [Validators.required]],
+      idAssurance: ['', [Validators.required]],
       nom: ['', [Validators.required]],
       description: ['', [Validators.required]],
       prix: [null, [Validators.required]],

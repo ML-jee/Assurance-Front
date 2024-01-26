@@ -1,12 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import { OnInit } from '@angular/core';
+import { JwtService } from '../services/jwt.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-assurance',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatButtonModule,HttpClientModule,CommonModule],
   templateUrl: './assurance.component.html',
-  styleUrl: './assurance.component.css'
+  styleUrl: './assurance.component.css',
+  providers: [JwtService],
 })
-export class AssuranceComponent {
+export class AssuranceComponent  implements OnInit{
+  assurances: any[] = []; // Declare assurance as a property
 
+  constructor(private jwtService: JwtService) { }
+
+  ngOnInit(): void {
+    this.getAllAssurance();
+  }
+
+  
+  getAllAssurance(): void {
+    this.jwtService.getAllAssurances()
+      .subscribe({
+        next: (data: any []) => {
+          console.log('Fetched assurance:', data);
+          this.assurances = data;
+        },
+        error: (error: any) => {
+          console.error('Error fetching assurance:', error);
+        }
+      });
+  }
+
+  
+  chooseInsurance(idAssurance: string): void {
+    // Implement your logic for choosing insurance here
+    console.log('Insurance chosen:', idAssurance);
+  }
+  
+  
+  
+  
+  
 }

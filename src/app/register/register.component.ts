@@ -13,6 +13,7 @@
   import { CommonModule } from '@angular/common'; // Import CommonModule
   import { JwtService } from '../services/jwt.service';
   import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
   @Component({
     selector: 'app-register',
@@ -55,7 +56,8 @@
     constructor(
       private metaMaskService: MetaMaskService,
       private jwtService: JwtService,
-      private fb: FormBuilder
+      private fb: FormBuilder,
+      private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -85,6 +87,7 @@
     next: (response) => {
       // Handle successful response if needed
       console.log(response);
+      this.router.navigate(['/login']);
     },
     error: (error) => {
       // Handle error if needed
