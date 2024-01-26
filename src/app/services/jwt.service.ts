@@ -31,7 +31,20 @@ export class JwtService {
     return this.http.get(BASE_URL + `client/getInsurance/${idAssurance}`);
   }
 
-  chooseInsurance(idAssurance: string, addAssuranceDto: any): Observable<any> {
+  /*chooseInsurance(idAssurance: string, addAssuranceDto: any): Observable<any> {
     return this.http.post(BASE_URL + `client/chooseInsurance/${idAssurance}`, addAssuranceDto);
+  }*/
+  
+  chooseInsurance(idAssurance: string, addAssuranceDto: any): Observable<any> {
+    return this.http.post(BASE_URL + `client/chooseInsurance/${idAssurance}`, addAssuranceDto, { responseType: 'text' })
+      .pipe(
+        tap((response: any) => {
+          console.log('Insurance chosen successfully:', response);
+        }),
+        catchError((error: any) => {
+          console.error('Error choosing insurance:', error);
+          throw error; // Re-throw the error to be handled by the caller
+        })
+      );
   }
 }

@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 })
 export class AssuranceComponent  implements OnInit{
   assurances: any[] = []; // Declare assurance as a property
-  
+  addAssuranceDto: any = {};
   constructor(private jwtService: JwtService, private router: Router) { }
 
   ngOnInit(): void {
@@ -42,10 +42,20 @@ export class AssuranceComponent  implements OnInit{
 
   
   chooseInsurance(idAssurance: string): void {
-    // Implement your logic for choosing insurance here
-    console.log('Insurance chosen:', idAssurance);
-     // Navigate to the payment page
-     this.router.navigate(['/payment']);
+    // Additional logic can be implemented here if needed
+    this.jwtService.chooseInsurance(idAssurance, this.addAssuranceDto )
+      .subscribe({
+        next: (response: any) => {
+          console.log('Insurance chosen successfully:', response);
+          // Optionally, you can perform any additional action after choosing insurance
+          // For example, navigate to the payment page
+          this.router.navigate(['/payment']);
+        },
+        error: (error: any) => {
+          console.error('Error choosing insurance:', error);
+          // Optionally, you can handle error cases here
+        }
+      });
   }
   
   
