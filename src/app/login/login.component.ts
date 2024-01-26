@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const { adresseWallet, password } = this.loginForm.value;
+    const { adresseWallet } = this.loginForm.value;
 
     this.service.login(this.loginForm.value).subscribe((response) => {
       console.log(response);
-
+      
       // Check if adresseWallet is adminWallet
       if (adresseWallet === 'adminWallet') {
         // Redirect to /admin

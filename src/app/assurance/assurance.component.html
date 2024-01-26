@@ -7,11 +7,11 @@
         </mat-card-header>
         
         <mat-card-content class="example-card-content">
-          <div class="description-scroll-container">
+          
             <p>{{ singleAssurance?.description }}</p>
-          </div>
           <p>Price: {{ singleAssurance?.prix }}</p>
           <button mat-button color="primary" (click)="chooseInsurance(singleAssurance.idAssurance)">Choose</button>
+
         </mat-card-content>
       </mat-card>
     </div>

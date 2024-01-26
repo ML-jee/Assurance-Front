@@ -5,6 +5,7 @@ import { OnInit } from '@angular/core';
 import { JwtService } from '../services/jwt.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 
@@ -18,8 +19,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AssuranceComponent  implements OnInit{
   assurances: any[] = []; // Declare assurance as a property
-
-  constructor(private jwtService: JwtService) { }
+  
+  constructor(private jwtService: JwtService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllAssurance();
@@ -43,6 +44,8 @@ export class AssuranceComponent  implements OnInit{
   chooseInsurance(idAssurance: string): void {
     // Implement your logic for choosing insurance here
     console.log('Insurance chosen:', idAssurance);
+     // Navigate to the payment page
+     this.router.navigate(['/payment']);
   }
   
   

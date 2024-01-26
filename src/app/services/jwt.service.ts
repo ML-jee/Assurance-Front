@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 
 const BASE_URL = 'http://localhost:8085/';
@@ -10,6 +10,7 @@ const BASE_URL = 'http://localhost:8085/';
   providedIn: 'root'
 })
 export class JwtService {
+
 
   constructor(private http: HttpClient) { }
 
@@ -21,15 +22,16 @@ export class JwtService {
     return this.http.post(BASE_URL + 'client/login', loginRequest)
   }
 
+
   getAllAssurances(): Observable<any> {
     return this.http.get(BASE_URL + 'client/getInsurances');
   }
 
-  getInsurance(idAssurance: number): Observable<any> {
+  getInsurance(idAssurance: string): Observable<any> {
     return this.http.get(BASE_URL + `client/getInsurance/${idAssurance}`);
   }
 
-  chooseInsurance(idAssurance: number, addAssuranceDto: any): Observable<any> {
+  chooseInsurance(idAssurance: string, addAssuranceDto: any): Observable<any> {
     return this.http.post(BASE_URL + `client/chooseInsurance/${idAssurance}`, addAssuranceDto);
   }
 }

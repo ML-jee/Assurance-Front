@@ -6,6 +6,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AboutComponent } from './about/about.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AssuranceComponent } from './assurance/assurance.component';
+import { PaymentComponent } from './payment/payment.component';
 
 export const routes: Routes = [
   {path :'', component : HomepageComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {path : 'admin', component: AdminComponent},
   {path : 'about', component:AboutComponent},
-  {path : 'assurance', component:AssuranceComponent}
+  {path : 'assurance', component:AssuranceComponent},
+  {path : 'payment', component:PaymentComponent}
   
 ];
