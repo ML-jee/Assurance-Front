@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 import { MetaMaskService } from '../meta-mask.service';
 
 @Component({
@@ -12,19 +12,30 @@ import { MetaMaskService } from '../meta-mask.service';
   styleUrl: './wallet-button.component.css'
 })
 export class WalletButtonComponent {
+  userAddress: string = '';
+  userBalance: number = 0;
+
   constructor(private metaMaskService: MetaMaskService) {}
 
   connectToMetaMask(): void {
     if (this.metaMaskService.isMetaMaskEnabled()) {
       const web3 = this.metaMaskService.getWeb3();
 
-      // You can now use 'web3' to interact with MetaMask
-      // Example: Get the user's Ethereum address
+      // Get the user's Ethereum address
       web3.eth.getAccounts().then((accounts: any[]) => {
-        const userAddress = accounts[0];
-        prompt('Connected to MetaMask. User Address:', userAddress);
-        console.log('Connected to MetaMask. User Address:', userAddress);
-        // You can perform additional MetaMask-related actions here
+        this.userAddress = accounts[0];
+        
+        // Get the user's balance
+        web3.eth.getBalance(this.userAddress).then((balance: any) => {
+          this.userBalance = web3.utils.fromWei(balance, 'ether');
+          
+          // Display the user's address and balance (you can modify this part based on your UI)
+          prompt('Connected to MetaMask. User Address:', this.userAddress);
+          console.log('Connected to MetaMask. User Address:', this.userAddress);
+          prompt('User Balance:', String(this.userBalance));
+          
+          // You can perform additional MetaMask-related actions here
+        });
       });
     } else {
       console.log('MetaMask is not enabled.');
