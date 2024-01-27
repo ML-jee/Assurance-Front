@@ -14,6 +14,9 @@ const profileContractAddress = "0x7c44626DFA8Bfac9f326Fd9dfeFEE8daBF8f1977";
   providedIn: 'root',
 })
 export class MetaMaskService {
+  connectMetaMask() {
+    throw new Error('Method not implemented.');
+  }
   private web3: any;
   private solde!: number;
   private adresse!: string;
