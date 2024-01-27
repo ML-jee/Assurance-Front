@@ -1,0 +1,100 @@
+<div class="mat-form-container">
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mat-form">
+
+    <div class="mat-form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput required formControlName="prenom"  />
+        <mat-error *ngIf="registerForm.get('prenom')?.invalid && registerForm.get('prenom')?.touched">
+          First name is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput required formControlName="nom" />
+      </mat-form-field>
+    </div>
+
+    <div class="mat-form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>CIN</mat-label>
+        <input matInput required formControlName="cin" />
+        <mat-error *ngIf="registerForm.get('cin')?.invalid && registerForm.get('cin')?.touched">
+          CIN is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input matInput required type="email"  formControlName="email"  />
+        <mat-error *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          Please enter a valid email address
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mat-form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Gnere</mat-label>
+        <input matInput required type="texte"  formControlName="genre"  />
+        <mat-error *ngIf="registerForm.get('genre')?.invalid && registerForm.get('genre')?.touched">
+          Genre is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Wallet Address</mat-label>
+        <input matInput required formControlName="adresseWallet"  />
+      </mat-form-field>
+    </div>
+
+    <div class="mat-form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput required type="number" formControlName="revenue"  />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Number of Children</mat-label>
+        <input matInput required type="number" formControlName="nbreEnfants"  />
+      </mat-form-field>
+    </div>
+
+    
+
+    <div class="mat-form-row">
+      <mat-form-field appearance="outline" class="dob-field">
+        <mat-label>Job Title</mat-label>
+        <input matInput required formControlName="emploi"  />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Marital Status</mat-label>
+        <mat-select required formControlName="statutMarital">
+          <mat-option value="single">Single</mat-option>
+          <mat-option value="married">Married</mat-option>
+          <mat-option value="divorced">Divorced</mat-option>
+          <mat-option value="widowed">Widowed</mat-option>
+        </mat-select>
+        <mat-error *ngIf="registerForm.get('statutMarital')?.invalid && registerForm.get('statutMarital')?.touched"
+        >
+          Marital status is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mat-form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput aria-required="dateOfBirth" type="date" formControlName="dateNaissance" required />
+        <mat-error *ngIf="registerForm.get('dateNaissance')?.invalid && registerForm.get('dateNaissance')?.touched">
+          Date of birth is required
+        </mat-error>
+      </mat-form-field>
+        <mat-form-field appearance="outline" class="address-field">
+          <mat-label>Address</mat-label>
+          <textarea matInput required formControlName="adresse" rows="1"></textarea>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid" >
+      Submit
+    </button>
+  </form>
+</div>

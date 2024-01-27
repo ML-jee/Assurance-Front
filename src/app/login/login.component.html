@@ -1,0 +1,14 @@
+<div class="mat-form-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mat-form">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Wallet Address</mat-label>
+      <input matInput required formControlName="adresseWallet" />
+    </mat-form-field>
+
+    
+    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+      Login
+    </button>
+  </form>
+</div>

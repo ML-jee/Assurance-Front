@@ -1,0 +1,40 @@
+.mat-form-container {
+  width: 350px;
+  height: 200px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  align-items: center; /* Align items (including the button) in the center horizontally */
+
+}
+
+.mat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 70%;
+  align-self: center;
+}
+
+mat-label {
+  font-size: 14px;
+  color: #333;
+}
+
+mat-error {
+  font-size: 12px;
+  color: #d9534f; /* Bootstrap danger color */
+}
+
+textarea.mat-input-element {
+  resize: vertical;
+}
+
+button {
+  align-self: center; /* Align the button in the center horizontally */
+
+}

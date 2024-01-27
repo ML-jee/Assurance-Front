@@ -1,0 +1,9 @@
+<div>
+    <h2>Make a Payment</h2>
+    <form (ngSubmit)="makePayment()">
+      <label for="amount">Amount:</label>
+      <input type="text" id="amount" name="amount" [(ngModel)]="paymentAmount" required>
+      <button type="submit">Pay</button>
+    </form>
+  </div>
+  
