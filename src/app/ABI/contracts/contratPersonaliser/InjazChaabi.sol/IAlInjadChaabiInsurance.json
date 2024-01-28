@@ -1,0 +1,231 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IAlInjadChaabiInsurance",
+  "sourceName": "contracts/contratPersonaliser/InjazChaabi.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "beneficiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "claimAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "ClaimProcessed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "policyHolder",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "PremiumPaid",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "getDeathAssistance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "funeralTransport",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "burialRepatriation",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "escortAbroad",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "returnHome",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getDriverAssistance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "chauffeurService",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "vehicleImmobilization",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "defenseAbroad",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "foreignCriminalCaution",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getHospitalizationCoverage",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "coveragePercentage",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "privateRoom",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "surgeryLimitation",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dailyAllowance",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getMedicalAssistance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "medicalTransport",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "accommodationExpenses",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "admissionAdvance",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "internationalMedicalExpenses",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "medicalAdvice",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTechnicalAssistance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "vehicleRecovery",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "towing",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "sparePartsShipping",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "storageExpenses",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "legalAbandonmentFees",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "payPremium",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "enum IAlInjadChaabiInsurance.AssistanceType",
+          "name": "_assistanceType",
+          "type": "uint8"
+        }
+      ],
+      "name": "processClaim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renewContract",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

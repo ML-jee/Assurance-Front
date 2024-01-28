@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormBuilder, FormsModule, Validators } from '@angular/forms'; // Import FormsModule
+import { MetaMaskService } from '../meta-mask.service';
 
 declare let window: any;
 
@@ -11,60 +12,36 @@ declare let window: any;
   styleUrl: './payment.component.css'
 })
 export class PaymentComponent {
-  paymentAmount!: number;
-
-  constructor() { }
-
+  amount: number = 0;
+  optionalAddress: string = '';
+  registerForm: any;
   ngOnInit(): void {
-    this.initializeMetaMask();
+    this.registerForm = this.fb.group({
+      amount: ['', [Validators.required]],
+      optionalAddress: ['', [Validators.required]],
+    
+    });
   }
 
-  async initializeMetaMask() {
-    try {
-      // Ensure MetaMask is installed
-      if (window.ethereum) {
-        // Request access to MetaMask
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        console.log('MetaMask initialized.');
-
-        // Now MetaMask is initialized, you can proceed with transactions
-      } else {
-        console.error('MetaMask not detected.');
-        // Handle MetaMask not detected
-      }
-    } catch (error) {
-      console.error('Error initializing MetaMask:', error);
-      // Handle initialization error
+  constructor(private metaMaskService: MetaMaskService,
+    private fb: FormBuilder,) {
+      
     }
+  userAddress: string = '';
+  userBalance: number = 0;
+
+  onSubmit(): void {
+    this.metaMaskService.connectWallet();
+
+    this.optionalAddress = ''; // Initialize optionalAddress with an empty string
+    this.amount = 0; // Initialize amount with 0
+    // Call the transferFunds method from MetaMaskService
+    this.metaMaskService.transferFunds(this.amount, this.optionalAddress);
+    // Optionally, you can add logic to reset the form or show success messages
   }
 
-  makePayment() {
-    const amount = this.paymentAmount;
-    const ethereum = window.ethereum;
 
-    if (ethereum) {
-      ethereum
-        .request({
-          method: 'eth_sendTransaction',
-          params: [
-            {
-              to: 'RECEIVER_ADDRESS',
-              from: ethereum.selectedAddress,
-              value: window.web3.utils.toHex(window.web3.utils.toWei(amount, 'ether'))
-            }
-          ]
-        })
-        .then((txHash: string) => {
-          console.log('Transaction successful:', txHash);
-          // Handle success
-        })
-        .catch((error: any) => {
-          console.error('Transaction error:', error);
-          // Handle error
-        });
-    } else {
-      console.error('MetaMask not detected.');
-      // Handle MetaMask not detected
-    }
-  }
+
+
+
 }

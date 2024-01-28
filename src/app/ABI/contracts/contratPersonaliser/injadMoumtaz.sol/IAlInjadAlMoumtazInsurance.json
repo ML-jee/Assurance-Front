@@ -1,0 +1,279 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IAlInjadAlMoumtazInsurance",
+  "sourceName": "contracts/contratPersonaliser/injadMoumtaz.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "beneficiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "claimAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "ClaimProcessed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "policyHolder",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "PremiumPaid",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_individual",
+          "type": "address"
+        }
+      ],
+      "name": "addCoverageForIndividual",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_vehicle",
+          "type": "address"
+        }
+      ],
+      "name": "addCoverageForVehicle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum IAlInjadAlMoumtazInsurance.OptionalGuarantee",
+          "name": "_guarantee",
+          "type": "uint8"
+        }
+      ],
+      "name": "addOptionalGuarantee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getBenefits",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "thirdPartyPayment",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "directBilling",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "reimbursement",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCoverageArea",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "coverageArea",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getCoverageType",
+      "outputs": [
+        {
+          "internalType": "enum IAlInjadAlMoumtazInsurance.CoverageType",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_policyHolder",
+          "type": "address"
+        }
+      ],
+      "name": "getPremiumDetails",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getReimbursementRates",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "hospitalizationRate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "surgeryRate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "chemistryRate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "radiologyRate",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_individual",
+          "type": "address"
+        }
+      ],
+      "name": "isCoverageActiveForIndividual",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_vehicle",
+          "type": "address"
+        }
+      ],
+      "name": "isCoverageActiveForVehicle",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum IAlInjadAlMoumtazInsurance.OptionalGuarantee",
+          "name": "_guarantee",
+          "type": "uint8"
+        }
+      ],
+      "name": "isOptionalGuaranteeActive",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "payPremium",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_claimAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "processClaim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum IAlInjadAlMoumtazInsurance.OptionalGuarantee",
+          "name": "_guarantee",
+          "type": "uint8"
+        }
+      ],
+      "name": "removeOptionalGuarantee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

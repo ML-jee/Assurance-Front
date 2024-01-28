@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
-import contractABI from './ABI/UserContractABI.json';
+import contractABI from './ABI/Verification.json';
 import profileContractABI from './ABI/profileContractABI.json';
+import MaRetraiteContractABI from './ABI/contracts/contratPersonaliser/MaRetraite.sol/maRetraite.json';
 import Web3 from 'web3';
 
 declare let window: any;
 
-const contractAddress = "0x5ddD38226F953A5ae7365cE51da7d2f5A6839C6f";
+const contractAddress = "0xa73fd1656df1d4233a070a4e78ecc34df7162457";
 const profileContractAddress = "0x7c44626DFA8Bfac9f326Fd9dfeFEE8daBF8f1977";
-
+const MaRetraiteContractAddress = "0x7c44626DFA8Bfac9f326Fd9dfeFEE8daBF8f1977";
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class MetaMaskService {
+  contract: any;
   connectMetaMask() {
     throw new Error('Method not implemented.');
   }
@@ -22,6 +24,7 @@ export class MetaMaskService {
   private adresse!: string;
   private privateKey!: string;
   private publicKey!: string;
+  connectedAccount: string | undefined;
 
   constructor() {
     this.init();
@@ -111,27 +114,23 @@ export class MetaMaskService {
         }
 
         // user enables the app to connect to MetaMask
-        const tempWeb3 = new Web3(window.ethereum);
         // Assuming setWeb3, setContract, setAccount are methods you have in your service
-        this.setWeb3(tempWeb3);
-        const contractInstance = new tempWeb3.eth.Contract(
+        const contractInstance = new this.web3.eth.Contract(
           contractABI,
           contractAddress
         );
+        this.contract=contractInstance;
 
-        const profileContractInstance = new tempWeb3.eth.Contract(
-          profileContractABI,
-          profileContractAddress
-        );
+        // const profileContractInstance = new tempWeb3.eth.Contract(
+        //   profileContractABI,
+        //   profileContractAddress
+        // );
         // Assuming setProfileContract is a method you have in your service
-        this.setProfileContract(profileContractInstance);
-        console.log('HIIIIIII');
-        const accounts = await tempWeb3.eth.getAccounts();
-        console.log('aCCOUNTS', accounts);
+        const accounts = await this.web3.eth.getAccounts();
         if (accounts.length > 0) {
           // Assuming setContract and setAccount are methods you have in your service
-          this.setContract(contractInstance);
-          this.setAccount(accounts[0]);
+          this.adresse=accounts[0];
+          this.connectedAccount = accounts[0]; // Set the connected account
         }
         console.log('NAHHHHHH');
       } catch (error) {
@@ -141,21 +140,58 @@ export class MetaMaskService {
       console.error('No web3 provider detected');
     }
   }
-
-  // Add these methods based on your actual implementation
-  private setWeb3(web3: any): void {
-    // Set your web3 attribute
+  setAccount(arg0: string) {
+    throw new Error('Method not implemented.');
   }
 
-  private setContract(contractInstance: any): void {
-    // Set your contract attribute
-  }
+ 
 
-  private setProfileContract(profileContractInstance: any): void {
-    // Set your profile contract attribute
-  }
 
-  private setAccount(account: string): void {
-    // Set your account attribute
+  async transferFunds(amount: number, optionalAddress?: string): Promise<void> {
+    try {
+      if (!this.web3) {
+        console.error('Web3 is not initialized.');
+        return;
+      }
+
+ 
+
+      if (!this.connectedAccount) {
+        console.error('No account is connected.');
+        return;
+      }
+
+      // Requesting user's signature
+      const signature = await this.requestUserSignature(this.connectedAccount);
+
+      // You can customize the contract method and parameters based on your actual contract
+      const transaction = await this.contract.methods
+        .recover(signature, signature)
+        .send({
+          from: this.connectedAccount,
+          gas: 3000000, // Adjust the gas value based on your contract's requirements
+          signature,
+        });
+
+      console.log('Transaction details:', transaction);
+
+      // Add any additional logic or notifications after a successful transfer
+    } catch (error) {
+      console.error('Failed to transfer funds:', error);
+      // Handle errors or show user-friendly messages
+    }
   }
+  private async requestUserSignature(account: string): Promise<string> {
+    try {
+      const message = 'Please sign your Contract.';
+      const signature = await this.web3.eth.personal.sign(message, account, '');
+  
+      return signature;
+    } catch (error) {
+      console.error('Failed to request user signature:', error);
+      throw error;
+    }
+  }
+  
+
 }
