@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, Validators } from '@angular/forms'; // Import FormsModule
 import { MetaMaskService } from '../meta-mask.service';
-
-declare let window: any;
+import { ContractAddedComponent } from '../contract-added/contract-added.component';
+import { MatDialog } from '@angular/material/dialog';
+ declare let window: any;
 
 @Component({
   selector: 'app-payment',
@@ -23,23 +24,33 @@ export class PaymentComponent {
     });
   }
 
-  constructor(private metaMaskService: MetaMaskService,
-    private fb: FormBuilder,) {
-      
-    }
+  constructor(
+    private metaMaskService: MetaMaskService,
+    private fb: FormBuilder,
+    private dialog: MatDialog
+  ) {}
   userAddress: string = '';
   userBalance: number = 0;
 
   onSubmit(): void {
     this.metaMaskService.connectWallet();
-
-    this.optionalAddress = ''; // Initialize optionalAddress with an empty string
-    this.amount = 0; // Initialize amount with 0
-    // Call the transferFunds method from MetaMaskService
+    this.optionalAddress = '';
+    this.amount = 0;
     this.metaMaskService.transferFunds(this.amount, this.optionalAddress);
-    // Optionally, you can add logic to reset the form or show success messages
-  }
 
+    // Open a modal after funds transfer
+    const dialogRef = this.dialog.open(ContractAddedComponent, {
+      data: {
+        title: 'Transfer Successful',
+        content: 'Your funds have been transferred successfully!',
+      },
+    });
+
+    // Optionally, you can subscribe to the dialog's afterClosed event
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
 
 
 

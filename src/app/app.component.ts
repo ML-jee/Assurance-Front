@@ -8,6 +8,7 @@ import {FormComponent } from "./form/form.component";
 import { BlockchaineSectionComponent } from "./blockchaine-section/blockchaine-section.component";
 import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './register/register.component';
+import { ContractAddedComponent } from './contract-added/contract-added.component';
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -15,7 +16,7 @@ import { RegisterComponent } from './register/register.component';
     styleUrl: './app.component.css',
     imports: [CommonModule, RouterOutlet, NavBarComponent, 
       ConnectionComponent, HomepageComponent,
-    RegisterComponent]})
+    RegisterComponent, WalletButtonComponent, FormComponent, BlockchaineSectionComponent,ContractAddedComponent],})
 
 export class AppComponent {
   title = 'Assurance-Front';
