@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import contractABI from './ABI/Verification.json';
 import profileContractABI from './ABI/profileContractABI.json';
-import MaRetraiteContractABI from './ABI/contracts/contratPersonaliser/MaRetraite.sol/maRetraite.json';
+import MaRetraiteContractABI from './ABI/contracts/contratPersonaliser/MaRetraite.sol/MaRetraite.json';
 import Web3 from 'web3';
 
 declare let window: any;
 
 const contractAddress = "0xa73fd1656df1d4233a070a4e78ecc34df7162457";
 const profileContractAddress = "0x7c44626DFA8Bfac9f326Fd9dfeFEE8daBF8f1977";
-const MaRetraiteContractAddress = "0x7c44626DFA8Bfac9f326Fd9dfeFEE8daBF8f1977";
+const MaRetraiteContractAddress = "0xb7e711F6a58E70A7DBE8ACD5B499153Fbed1Ee93";
 
 
 @Injectable({
@@ -52,7 +52,7 @@ export class MetaMaskService {
   private initializeAttributes(): void {
     // You can set your attributes with necessary values here
     this.solde = 0; // Set the initial value for solde
-    this.adresse = ''; // Set the initial value for adresse
+    this.adresse = '0x0E0a7edd5D401a5595E218A8490B4C1F86C85CbD'; // Set the initial value for adresse
     this.privateKey = ''; // Set the initial value for privateKey
     this.publicKey = ''; // Set the initial value for publicKey
   }
@@ -116,8 +116,8 @@ export class MetaMaskService {
         // user enables the app to connect to MetaMask
         // Assuming setWeb3, setContract, setAccount are methods you have in your service
         const contractInstance = new this.web3.eth.Contract(
-          contractABI,
-          contractAddress
+          MaRetraiteContractABI,
+          MaRetraiteContractAddress
         );
         this.contract=contractInstance;
 
@@ -166,14 +166,16 @@ export class MetaMaskService {
 
       // You can customize the contract method and parameters based on your actual contract
       const transaction = await this.contract.methods
-        .recover(signature, signature)
+        .addContract(amount, optionalAddress)
         .send({
           from: this.connectedAccount,
           gas: 3000000, // Adjust the gas value based on your contract's requirements
           signature,
         });
 
-      console.log('Transaction details:', transaction);
+
+
+      prompt('Transaction details:', transaction);
 
       // Add any additional logic or notifications after a successful transfer
     } catch (error) {
@@ -193,5 +195,15 @@ export class MetaMaskService {
     }
   }
   
+  ContractAdded(){
+    const wsweb3 = new Web3("wss://sepolia.infura.io/ws/v3/3TBN61IK7A554H7H3HTR8Q4Y5CTGZXV7E1");
+
+    // create a new contract object, providing the ABI and address
+    const contract = new wsweb3.eth.Contract(contractABI, this.adresse);
+  
+  // using contract.methods to get value
+  const subscription = contract.events['ContractAdded']();
+  subscription.on("data", console.log);
+  }
 
 }
