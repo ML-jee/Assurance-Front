@@ -150,21 +150,17 @@ export class MetaMaskService {
   async transferFunds(amount: number, optionalAddress?: string): Promise<void> {
     try {
       if (!this.web3) {
-        console.error('Web3 is not initialized.');
-        return;
+        throw new Error('Web3 is not initialized.');
       }
-
- 
-
+  
       if (!this.connectedAccount) {
-        console.error('No account is connected.');
-        return;
+        throw new Error('No account is connected.');
       }
-
+  
       // Requesting user's signature
       const signature = await this.requestUserSignature(this.connectedAccount);
-
-      // You can customize the contract method and parameters based on your actual contract
+  
+      // Customize the contract method and parameters based on your actual contract
       const transaction = await this.contract.methods
         .addContract(amount, optionalAddress)
         .send({
@@ -172,38 +168,51 @@ export class MetaMaskService {
           gas: 3000000, // Adjust the gas value based on your contract's requirements
           signature,
         });
-
-
-
-      prompt('Transaction details:', transaction);
-
+  
+      console.log('Transaction details:', transaction);
+  
       // Add any additional logic or notifications after a successful transfer
-    } catch (error) {
-      console.error('Failed to transfer funds:', error);
+    } catch (error: any) {
+      console.error('Failed to transfer funds:', error.message || error);
       // Handle errors or show user-friendly messages
     }
   }
+  
   private async requestUserSignature(account: string): Promise<string> {
     try {
       const message = 'Please sign your Contract.';
       const signature = await this.web3.eth.personal.sign(message, account, '');
   
       return signature;
-    } catch (error) {
-      console.error('Failed to request user signature:', error);
+    } catch (error: any) {
+      console.error('Failed to request user signature:', error.message || error);
       throw error;
     }
   }
   
-  ContractAdded(){
-    const wsweb3 = new Web3("wss://sepolia.infura.io/ws/v3/3TBN61IK7A554H7H3HTR8Q4Y5CTGZXV7E1");
 
-    // create a new contract object, providing the ABI and address
-    const contract = new wsweb3.eth.Contract(contractABI, this.adresse);
-  
-  // using contract.methods to get value
-  const subscription = contract.events['ContractAdded']();
-  subscription.on("data", console.log);
+  ContractAdded() {
+    try {
+      const wsweb3 = new Web3("wss://sepolia.infura.io/ws/v3/3TBN61IK7A554H7H3HTR8Q4Y5CTGZXV7E1");
+
+      // Create a new contract object, providing the ABI and address
+      const contract = new wsweb3.eth.Contract(contractABI, this.adresse);
+
+      // Using contract.events to subscribe to 'ContractAdded' event
+      const subscription = contract.events['ContractAdded']();
+      subscription.on("data", (eventData) => {
+        console.log('ContractAdded event data:', eventData);
+
+        // Assuming you have a UI service to handle modals
+        // this.uiService.showModalWithData(eventData);
+        // Modify this line according to your actual UI service or library
+
+      });
+    } catch (error: any) {
+      console.error('Failed to subscribe to ContractAdded event:', error.message || error);
+      // Handle errors or show user-friendly messages
+    }
   }
+  
 
 }
